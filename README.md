@@ -33,6 +33,7 @@ git push -u origin main
 2. Click **New** → **Web Service**
 3. Connect your GitHub repo
 4. Render auto-detects `render.yaml` and fills everything in
+ (If asked for Start Command : gunicorn app:app --workers 2 --timeout 120 and Build Command : pip install --upgrade pip && pip install -r requirements.txt)  
 5. Click **Deploy**
 
 Wait 2–3 minutes for the first build. Render installs dependencies and starts gunicorn.
