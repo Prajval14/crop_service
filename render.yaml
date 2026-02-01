@@ -1,0 +1,23 @@
+services:
+  - name: doc-cropper
+    type: web
+    plan: free
+    runtime: python3
+
+    # ── Build ──────────────────────────────────
+    # Render auto-detects requirements.txt, but being explicit is clearer.
+    buildCommand: pip install --upgrade pip && pip install -r requirements.txt
+
+    # ── Start ──────────────────────────────────
+    # gunicorn is the production WSGI server.
+    # - "app:app" means: in the file app.py, use the object named 'app'
+    # - --workers 2: two worker processes (handles concurrent requests)
+    # - --timeout 120: each request gets up to 120s before being killed
+    #   (OpenCV processing can take a few seconds on bigger images)
+    startCommand: gunicorn app:app --workers 2 --timeout 120
+
+    # ── Environment ────────────────────────────
+    envs:
+      # Tells Flask it's running behind a proxy (Render's edge)
+      - key: FLASK_ENV
+        value: production
