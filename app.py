@@ -365,7 +365,7 @@ def crop_document():
 
     # ── Generate PDF (from the B&W version) ──
     pdf_path = os.path.join(app.config['OUTPUT_FOLDER'], f"{file_id}_cropped.pdf")
-    generate_pdf(cropped_bw_path, pdf_path)
+    generate_pdf(cropped_color_path, pdf_path)
 
     return jsonify({
         "success": True,
